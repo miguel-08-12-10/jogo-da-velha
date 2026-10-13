@@ -9,13 +9,12 @@ package br.com.senac.jogodavelha;
  * @author miguel62977036
  */
 public class Tabuleiro {
-
     private int notaJ1;
     private int notaJ2;
     private String regras;
     private boolean houveganhadorUltimarodada;
     private int jogadorDaVez;
-    private char a1 = ' ',a2 = ' ',a3 = ' ',b1 = ' ',b2 = ' ',b3 = ' ',c1 = ' ',c2 = ' ',c3 = ' ';
+    private char a1 = ' ', a2 = ' ', a3 = ' ', b1 = ' ', b2 = ' ', b3 = ' ', c1 = ' ', c2 = ' ', c3 = ' ';
 
     public int getJogadorDaVez() {
         return jogadorDaVez;
@@ -66,33 +65,34 @@ public class Tabuleiro {
     }
 
     public void verificarGanhador(char simbolo, String nome){
-        if(a1 == simbolo && a2 == simbolo && a3 == simbolo){
+        boolean venceu = false;
+
+        if(a1 == simbolo && a2 == simbolo && a3 == simbolo) venceu = true;
+        else if (b1 == simbolo && b2 == simbolo && b3 == simbolo) venceu = true;
+        else if (c1 == simbolo && c2 == simbolo && c3 == simbolo) venceu = true;
+        else if (a1 == simbolo && b2 == simbolo && c3 == simbolo) venceu = true;
+        else if (a3 == simbolo && b3 == simbolo && c3 == simbolo) venceu = true;
+        else if (a2 == simbolo && b2 == simbolo && c2 == simbolo) venceu = true;
+        else if (a3 == simbolo && b2 == simbolo && c1 == simbolo) venceu = true;
+        else if (a1 == simbolo && b1 == simbolo && c1 == simbolo) venceu = true;
+
+        if (venceu) {
             this.houveganhadorUltimarodada = true;
-        }
-        else if (b1 == simbolo && b2 == simbolo && b3 == simbolo){
-            this.houveganhadorUltimarodada = true;
-        }
-        else if (c1 == simbolo && c2 == simbolo && c3 == simbolo){
-            this.houveganhadorUltimarodada = true;
-        }
-        else if (a1 == simbolo && b2 == simbolo && c3 == simbolo){
-            this.houveganhadorUltimarodada = true;
-        }
-        else if (a3 == simbolo && b3 == simbolo && c3 == simbolo){
-            this.houveganhadorUltimarodada = true;
-        }
-        else if (a2 == simbolo && b2 == simbolo && c2 == simbolo){
-            this.houveganhadorUltimarodada = true;
-        }
-        else if (a3 == simbolo && b2 == simbolo && c1 == simbolo){
-            this.houveganhadorUltimarodada = true;
-        }
-        else if (a1 == simbolo && b1 == simbolo && c1 == simbolo){
-            this.houveganhadorUltimarodada = true;
-        
-            if(this.isHouveganhadorUltimarodada()){
-                 System.out.println("parabens voce fez o básico" + nome);
+            
+            // Incrementa o placar com base no símbolo do jogador
+            if (simbolo == 'X') {
+                this.notaJ1++;
+            } else {
+                this.notaJ2++;
             }
+
+            // Exibe o placar
+            System.out.println("\n==============================");
+            System.out.println("Parabens " + nome + ", voce fez o básico!");
+            System.out.println("--- PLACAR DA PARTIDA ---");
+            System.out.println("Jogador 1 (X): " + this.notaJ1 + " ponto(s)");
+            System.out.println("Jogador 2 (O): " + this.notaJ2 + " ponto(s)");
+            System.out.println("==============================\n");
         }
     }
 
@@ -148,8 +148,8 @@ public class Tabuleiro {
                   break;
           }
     }
-          // === COLE O SEGUNDO CÓDIGO AQUI ===
-    public boolean posicaoEstaVazia(String coordenada){
+
+    public boolean posicaoEstaVazia(String coordenada) {
         switch (coordenada.toLowerCase()) {
             case "a1": return this.a1 == ' ';
             case "a2": return this.a2 == ' ';
@@ -163,9 +163,7 @@ public class Tabuleiro {
             default: return false;
         }
     }
-
-} // Fecha a classe Tabuleiro
-    
+}   
 
    
         
