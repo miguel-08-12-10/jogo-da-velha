@@ -9,18 +9,14 @@ package br.com.senac.jogodavelha;
  * @author miguel62977036
  */
 public class Tabuleiro {
+
     private int notaJ1;
-   
     private int notaJ2;
     private String regras;
     private boolean houveganhadorUltimarodada;
     private int jogadorDaVez;
     private char a1 = ' ',a2 = ' ',a3 = ' ',b1 = ' ',b2 = ' ',b3 = ' ',c1 = ' ',c2 = ' ',c3 = ' ';
 
-    
-    
-
-    
     public int getJogadorDaVez() {
         return jogadorDaVez;
     }
@@ -28,7 +24,6 @@ public class Tabuleiro {
     public void setJogadorDaVez(int jogadorDaVez) {
         this.jogadorDaVez = jogadorDaVez;
     }
-    
 
     public boolean isHouveganhadorUltimarodada() {
         return houveganhadorUltimarodada;
@@ -64,57 +59,115 @@ public class Tabuleiro {
 
     public Tabuleiro(String regras) {
         this.regras = regras;
-       
         this.notaJ1 = 0;
         this.notaJ2 = 0;
         this.houveganhadorUltimarodada = false;
         this.jogadorDaVez = 1;
     }
+
     public void verificarGanhador(char simbolo, String nome){
-        
         if(a1 == simbolo && a2 == simbolo && a3 == simbolo){
             this.houveganhadorUltimarodada = true;
-            
         }
         else if (b1 == simbolo && b2 == simbolo && b3 == simbolo){
             this.houveganhadorUltimarodada = true;
-            
         }
         else if (c1 == simbolo && c2 == simbolo && c3 == simbolo){
             this.houveganhadorUltimarodada = true;
-             
         }
         else if (a1 == simbolo && b2 == simbolo && c3 == simbolo){
             this.houveganhadorUltimarodada = true;
-            
         }
         else if (a3 == simbolo && b3 == simbolo && c3 == simbolo){
             this.houveganhadorUltimarodada = true;
-             
         }
         else if (a2 == simbolo && b2 == simbolo && c2 == simbolo){
             this.houveganhadorUltimarodada = true;
-             
         }
         else if (a3 == simbolo && b2 == simbolo && c1 == simbolo){
             this.houveganhadorUltimarodada = true;
-            
         }
         else if (a1 == simbolo && b1 == simbolo && c1 == simbolo){
             this.houveganhadorUltimarodada = true;
         
             if(this.isHouveganhadorUltimarodada()){
-                 System.out.println("parabens voce fez o básico" + nome);}
+                 System.out.println("parabens voce fez o básico" + nome);
             }
-           
         }
-            
+    }
 
     public void organizar(){
         
     }    
-       
-           
+
+    public void mostrarTabuleiro(){
+          System.out.printf("""
+                                  |        |        
+                         1        |        |        
+                               %c      %c      %c
+                                  |        |        
+                            -------+-------+-------
+                                  |        |        
+                         2     %c  |   %c    |  %c
+                                  |        |        
+                            -------+-------+-------
+                                  |        |        
+                         3    %c   |   %c    |   %c  
+                                  |        |        
+                            """,a1,a2,a3,b1,b2,b3,c1,c2,c3);
+    }
+    
+    public void marcarJogada(char simbolo, String coordenada){
+          switch(coordenada){
+              case "a1":
+                  this.a1 = simbolo;
+                  break;
+              case "a2":
+                  this.a2 = simbolo;
+                  break;
+              case "a3":
+                  this.a3 = simbolo;
+                  break;
+              case "b1":
+                  this.b1 = simbolo;
+                  break;
+              case "b2":
+                  this.b2 = simbolo;
+                  break;
+              case "b3":
+                  this.b3 = simbolo;
+                  break;
+              case "c1":
+                  this.c1 = simbolo;
+                  break;
+              case "c2":
+                  this.c2 = simbolo;
+                  break;
+              case "c3":
+                  this.c3 = simbolo;
+                  break;
+          }
+    }
+          // === COLE O SEGUNDO CÓDIGO AQUI ===
+    public boolean posicaoEstaVazia(String coordenada){
+        switch (coordenada.toLowerCase()) {
+            case "a1": return this.a1 == ' ';
+            case "a2": return this.a2 == ' ';
+            case "a3": return this.a3 == ' ';
+            case "b1": return this.b1 == ' ';
+            case "b2": return this.b2 == ' ';
+            case "b3": return this.b3 == ' ';
+            case "c1": return this.c1 == ' ';
+            case "c2": return this.c2 == ' ';
+            case "c3": return this.c3 == ' ';
+            default: return false;
+        }
+    }
+
+} // Fecha a classe Tabuleiro
+    
+
+   
         
  
         
@@ -123,70 +176,10 @@ public class Tabuleiro {
     
     
     
-    public void mostrarTabuleiro(){
-          System.out.printf("""
-                                  |       |       
-                         1        |       |      
-                               %c      %c      %c
-                                  |       |       
-                           -------+-------+-------
-                                  |       |       
-                          2     %c  |   %c    |  %c
-                                  |       |       
-                           -------+-------+-------
-                                  |       |       
-                          3    %c   |   %c    |   %c  
-                                  |       |       
-                           """,a1,a2,a3,b1,b2,b3,c1,c2,c3);
-        
-    }
+   
+          
     
-    public void marcarJogada(char simbolo, String coordenada){
-          switch(coordenada){
-              case "a1":
-                  this.a1 = simbolo;
-                  
-                  break;
-                  
-                  case "a2":
-                  this.a2 = simbolo;
-                  
-                  break;
-                  
-                  case "a3":
-                  this.a3 = simbolo;
-                  
-                  break;
-                  
-                  case "b1":
-                  this.b1 = simbolo;
-                  
-                  break;
-                  
-                  case "b2":
-                  this.b2 = simbolo;
-                  
-                  break;
-                  
-                  case "b3":
-                  this.b3 = simbolo;
-                  
-                  break;
-                  
-                  case "c1":
-                  this.c1 = simbolo;
-                  
-                  break;
-                  
-                  case "c2":
-                  this.c2 = simbolo;
-                  
-                  break;
-                  
-                  case "c3":
-                  this.c3 = simbolo;
-                  
-                  break;
-          }
-    }
-}
+
+
+
+

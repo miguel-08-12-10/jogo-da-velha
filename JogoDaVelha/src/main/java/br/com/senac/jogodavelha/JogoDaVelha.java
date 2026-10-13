@@ -10,45 +10,57 @@ import java.util.Scanner;
  *
  * @author miguel62977036
  */
+import java.util.Scanner;
+
 public class JogoDaVelha {
 
     public static void main(String[] args) {
         
         Scanner entrada = new Scanner(System.in);
         
-        Tabuleiro tabuleiro = new Tabuleiro("1 - cada jogador deve escolhr um simbolo; 2 - "
-                + "um jogador inicia a partida"+ "");
+        Tabuleiro tabuleiro = new Tabuleiro("1 - cada jogador deve escolhr um simbolo; 2 - um jogador inicia a partida");
         
-          Jogador jogador1 = new Jogador(1,"Miguel",'X');
-          Jogador jogador2 = new Jogador(2,"spider",'O');
+        Jogador jogador1 = new Jogador(1, "Miguel", 'X');
+        Jogador jogador2 = new Jogador(2, "spider", 'O');
           
-          tabuleiro.mostrarTabuleiro();
+        tabuleiro.mostrarTabuleiro();
         
-          do{
+        do {
             tabuleiro.mostrarTabuleiro();
             
-            if(tabuleiro.getJogadorDaVez() == 1){
-            System.out.println("Jogador1, escolha onde jogar: ");
-            String local = entrada.nextLine();
-            
-            tabuleiro.marcarJogada(jogador1.getSimbolo(),local);
-            tabuleiro.setJogadorDaVez(2);
-            tabuleiro.mostrarTabuleiro();
-            tabuleiro.verificarGanhador(jogador1.getSimbolo(),jogador1.getNome());
+            if (tabuleiro.getJogadorDaVez() == 1) {
+                System.out.println("Jogador 1, escolha onde jogar: ");
+                String local = entrada.nextLine().toLowerCase();
+                
+                // Repete enquanto a posição escolhida NÃO estiver vazia
+                while (!tabuleiro.posicaoEstaVazia(local)) {
+                    System.out.println("Posição já ocupada! Escolha outro lugar:");
+                    local = entrada.nextLine().toLowerCase();
+                }
+                
+                tabuleiro.marcarJogada(jogador1.getSimbolo(), local);
+                tabuleiro.setJogadorDaVez(2);
+                tabuleiro.verificarGanhador(jogador1.getSimbolo(), jogador1.getNome());
+                
+            } else {
+                System.out.println("Jogador 2, escolha onde jogar: ");
+                String local = entrada.nextLine().toLowerCase();
+                
+                // Repete enquanto a posição escolhida NÃO estiver vazia
+                while (!tabuleiro.posicaoEstaVazia(local)) {
+                    System.out.println("Posição já ocupada! Escolha outro lugar:");
+                    local = entrada.nextLine().toLowerCase();
+                }
+                
+                tabuleiro.marcarJogada(jogador2.getSimbolo(), local);
+                tabuleiro.setJogadorDaVez(1);
             }
-            else{
-                  System.out.println("jogador 2, escolha onde jogar");
-            String local = entrada.nextLine();
-            
-            tabuleiro.marcarJogada(jogador2.getSimbolo(),local);
-            tabuleiro.setJogadorDaVez(1);
-            tabuleiro.mostrarTabuleiro();
-            }
+              
+        } while (tabuleiro.isHouveganhadorUltimarodada() == false);
+    }
+}
             
 
            
-              
-          }while(tabuleiro.isHouveganhadorUltimarodada()== false);
-        }
-    }
+    
 
